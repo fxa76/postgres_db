@@ -15,9 +15,9 @@ services:
     volumes:
       - ./postgresql:/var/lib/postgresql
       # This needs explicit mapping due to https://github.com/docker-library/postgres/blob/4e48e3228a30763913ece952c611e5e9b95c8759/Dockerfile.template#L52
-      - ./data:/var/lib/postgresql/data
+      - data_postgres:/var/lib/postgresql/data
       - ./logs:/logs
-      - ./postgresql.conf:/var/lib/postgresql/data/postgresql.conf
+      
 
   adminer:
     image: adminer
@@ -43,6 +43,7 @@ networks:
 
 volumes:
   postgresql:
-  data:
+  data_postgres:
+    external: true
   logs:
     
