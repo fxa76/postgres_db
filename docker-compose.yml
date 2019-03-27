@@ -13,18 +13,12 @@ services:
     networks:
       - castaip
     volumes:
+      - ./data/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
       - ./postgresql:/var/lib/postgresql
       # This needs explicit mapping due to https://github.com/docker-library/postgres/blob/4e48e3228a30763913ece952c611e5e9b95c8759/Dockerfile.template#L52
       - data_postgres:/var/lib/postgresql/data
       - ./logs:/logs
       
-
-  adminer:
-    image: adminer
-    ports:
-      - 8080:8080
-    networks:
-      - castaip
 
   pgadmin4:
     image: dpage/pgadmin4
@@ -46,4 +40,3 @@ volumes:
   data_postgres:
     external: true
   logs:
-    
