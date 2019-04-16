@@ -12,6 +12,7 @@ services:
       - 2282:5432
     networks:
       - castaip
+    command: postgres -c listen_addresses='*' -c Port=2258 -c max_connections=300 -c temp_buffers=32MB -c work_mem=64MB -c maintenance_work_mem=1024MB -c fsync=off -c synchronous_commit=off -c full_page_writes=off -c commit_delay=10 -c checkpoint_completion_target=0.9 -c cursor_tuple_fraction=1  -c log_checkpoints=on  -c log_destination='stderr'  -c logging_collector=on  -c log_temp_files=1024kB -c log_autovacuum_min_duration=1000ms -c autovacuum_vacuum_cost_limit=200 -c bytea_output='escape' -c lc_messages='C' -c lc_monetary='C' -c lc_numeric='C' -c lc_time='C' -c max_locks_per_transaction=4096 -c standard_conforming_strings=on
     volumes:
       - ./data/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
       - ./postgresql:/var/lib/postgresql
